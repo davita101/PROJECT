@@ -43,7 +43,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <Menubar>
           <MenubarMenu>
-            <MenubarTrigger className="w-full" >{JSON.parse(localStorage.getItem("userSignUp"))["username"]}</MenubarTrigger>
+            <MenubarTrigger className="w-full" >{JSON.parse(localStorage.getItem("userSignUp") || "{}")?.username}</MenubarTrigger>
             <MenubarContent>
               <Link href={"/"}>
                 <MenubarItem>Log Out</MenubarItem>

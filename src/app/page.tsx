@@ -10,9 +10,9 @@ export default function page() {
   const [userSignUp, setUserSignUp] = useState<Student[]>(() => {
     if (typeof window !== "undefined") {
       const storedGroups = localStorage.getItem(`userSignUp`)
-      return storedGroups ? JSON.parse(storedGroups) : [{"username":"","password":""}];
+      return storedGroups ? JSON.parse(storedGroups) : [{ "username": "", "password": "" }];
     }
-    return [{"username":"","password":""}]
+    return [{ "username": "", "password": "" }]
   })
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function page() {
     if (typeof window !== "undefined") {
       localStorage.setItem(`userSignUp`, JSON.stringify(userSignUp));
     }
-    
+
   }, [userSignUp])
 
   return (
@@ -28,7 +28,7 @@ export default function page() {
       <Card className='px-4 py-4'>
         <Link href={"/auth/sign-in"}><Button >sign in</Button></Link>
         <Link href={"/auth/sign-up"}><Button variant={'ghost'}>sign up</Button></Link>
-        <Link href={"/dashboard"}><Button variant={'ghost'} onClick={() =>setUserSignUp([{"username":"","password":""}]) }>Without user</Button></Link>
+        <Link href={"/dashboard"}><Button variant={'ghost'} onClick={() => setUserSignUp([{ "username": "", "password": "" }])}>Without user</Button></Link>
       </Card>
     </div>
   )
