@@ -52,8 +52,11 @@ export default function signUpForm() {
       ),
     })
   }
-  
-  const [userSignUp, setUserSignUp] = useState<Student[]>(() => {
+  interface Student {
+    username: string
+    password: string
+  }
+  const [userSignUp, setUserSignUp] = useState<Student>(() => {
     if (typeof window !== "undefined") {
       const storedGroups = localStorage.getItem(`userSignUp`)
       return storedGroups ? JSON.parse(storedGroups) : form.getValues();

@@ -23,11 +23,16 @@ import { useState } from "react"
 const FormSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
-  }).refine(val => val === JSON.parse(localStorage.getItem("userSignUp"))["username"]),
-  password: z.string().min(6, {
-    message: "Password not much.",
-
-  }).refine(val => val === JSON.parse(localStorage.getItem("userSignUp"))["password"])
+  }).refine(val => {
+    const userSignUpData = JSON.parse(localStorage.getItem("userSignUp") ?? "{}");
+    return val === userSignUpData?.username;
+  }),
+  password: z.string().min(2, {
+    message: "password must be at least 2 characters.",
+  }).refine(val => {
+    const userSignUpData = JSON.parse(localStorage.getItem("userSignUp") ?? "{}");
+    return val === userSignUpData?.password;
+  }),
 })
 
 export default function InputForm() {
@@ -49,13 +54,16 @@ export default function InputForm() {
       ),
     })
   }
-  const [isLogin , setIsLogIn] = useState(false)
+  const [isLogin, setIsLogIn] = useState(false)
   const handleLogIn = () => {
-    if(JSON.parse(localStorage.getItem("userSignUp"))["password"] == form.getValues().password && JSON.parse(localStorage.getItem("userSignUp"))["username"] == form.getValues().username){
-      setIsLogIn(true)
+    const userSignUpData = JSON.parse(localStorage.getItem("userSignUp") ?? "{}");
+    if (
+      userSignUpData?.password === form.getValues().password &&
+      userSignUpData?.username === form.getValues().username
+    ) {
+      setIsLogIn(true);
     }
-    console.log(isLogin)
-  }
+  };
   return (
     <div className="flex justify-center items-center h-screen">
       <Card className=" px-4 w-[400px] py-4">

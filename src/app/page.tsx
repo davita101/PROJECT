@@ -20,6 +20,7 @@ export default function page() {
     if (typeof window !== "undefined") {
       localStorage.setItem(`userSignUp`, JSON.stringify(userSignUp));
     }
+    
   }, [userSignUp])
 
   return (
